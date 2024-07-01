@@ -4,7 +4,7 @@
         <title>リストジェネレータ</title>      
     </head>
     <body>
-        <form>
+        <form action = "listgen.php" method = "post" >
             <br>
             <label>F:</label>
             <input type="text" name="F" size=2>
@@ -32,11 +32,16 @@ $S = $_POST['S'];
 $Pre = $_POST['Pre'];
 $Post = $_POST['Post'];
 
-for($i = $F; $i < 10; $i = $i + $S){
-    print $Pre;
-    print $i;
-    print $Post;
-    
+if($F != "" && $E != "" && $S != "" && $Pre != "" && $Post){
+    for($i = $F; $i < 10; $i = $i + $S){
+        print $Pre;
+        print $i;
+        print $Post;
+        
+    }
+}
+else{
+    print "全てに文字を入力してください。";
 }
 
 ?>
