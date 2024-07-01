@@ -32,16 +32,22 @@ $S = $_POST['S'];
 $Pre = $_POST['Pre'];
 $Post = $_POST['Post'];
 
-if($F != "" && $E != "" && $S != "" && $Pre != "" && $Post){
-    for($i = $F; $i < 10; $i = $i + $S){
+if($F == ""){
+    $F = 0;
+}
+if($S == ""){
+    $S = 0;
+}
+
+if(is_numeric($F) == true && is_numeric($E) == true is_numeric($S) == true && $Pre != "" && $Post != ""){
+    for($i = $F; $i < $E; $i = $i + $S){
         print $Pre;
         print $i;
         print $Post;
-        
     }
 }
 else{
-    print "全てに文字を入力してください。";
+    print "エラー";
 }
 
 ?>
