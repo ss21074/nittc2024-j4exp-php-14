@@ -39,7 +39,7 @@ if($S == ""){
     $S = 0;
 }
 
-if(is_numeric($F) == true && is_numeric($E) == true is_numeric($S) == true && $Pre != "" && $Post != ""){
+if(is_numeric($F) && is_numeric($E) is_numeric($S) && $Pre != "" && $Post != ""){
     for($i = $F; $i < $E; $i = $i + $S){
         print $Pre;
         print $i;
