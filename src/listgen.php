@@ -39,15 +39,18 @@
                 }
 
                 
-                if($_POST && is_numeric($F) && is_numeric($E) && is_numeric($S)){
-                    for($i = $F; $i < $E; $i = $i + $S){
-                        print $Pre;
-                        print $i;
-                        print $Post;
+                if($_POST){
+                    if(is_numeric($F) && is_numeric($E) && is_numeric($S)){
+                        for($i = $F; $i < $E; $i = $i + $S){
+                            print $Pre;
+                            print $i;
+                            print $Post;
+                        }
                     }
-                }
-                else {
-                    print "エラー";
+                    else{
+                        print "エラー";
+                    
+                    }
                 }
             }
             catch (PDOException $e) {
@@ -56,8 +59,3 @@
             ?>
     </body>
 </html>
-
-
-
-
-
