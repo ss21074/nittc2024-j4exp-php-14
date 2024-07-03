@@ -25,13 +25,14 @@
 
             <?php
             try{
-                f($_POST){
-                    $F = $_POST['F'];
-                    $E = $_POST['E'];
-                    $S = $_POST['S'];
-                    $Pre = $_POST['Pre'];
-                    $Post = $_POST['Post'];
-    
+                
+                $F = $_POST['F'];
+                $E = $_POST['E'];
+                $S = $_POST['S'];
+                $Pre = $_POST['Pre'];
+                $Post = $_POST['Post'];
+                
+                if($_POST){
                     if($F == ""){
                         $F = 0;
                     }
@@ -48,11 +49,15 @@
                     }
                     else{
                         print "エラー";
-                }
+                    
+                    }
+
                 }
                 else {
-                    print "エラー"
+                    print "エラー";
                 }
+
+                
             }
             catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
