@@ -31,33 +31,24 @@
                 $S = $_POST['S'];
                 $Pre = $_POST['Pre'];
                 $Post = $_POST['Post'];
-                
-                if($_POST){
-                    if($F == ""){
-                        $F = 0;
-                    }
-                    if($S == ""){
-                        $S = 1;
-                    }
-    
-                    if(is_numeric($F) && is_numeric($E) && is_numeric($S)){
-                        for($i = $F; $i < $E; $i = $i + $S){
-                            print $Pre;
-                            print $i;
-                            print $Post;
-                        }
-                    }
-                    else{
-                        print "エラー";
-                    
-                    }
+                if($F == ""){
+                    $F = 0;
+                }
+                if($S == ""){
+                    $S = 1;
+                }
 
+                
+                if($_POST && is_numeric($F) && is_numeric($E) && is_numeric($S)){
+                    for($i = $F; $i < $E; $i = $i + $S){
+                        print $Pre;
+                        print $i;
+                        print $Post;
+                    }
                 }
                 else {
                     print "エラー";
                 }
-
-                
             }
             catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
