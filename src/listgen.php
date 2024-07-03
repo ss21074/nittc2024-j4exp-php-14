@@ -24,35 +24,39 @@
         </form>
 
             <?php
-            if($_POST){
-                $F = $_POST['F'];
-                $E = $_POST['E'];
-                $S = $_POST['S'];
-                $Pre = $_POST['Pre'];
-                $Post = $_POST['Post'];
-
-                if($F == ""){
-                    $F = 0;
-                }
-                if($S == ""){
-                    $S = 1;
-                }
-
-                if(is_numeric($F) && is_numeric($E) && is_numeric($S)){
-                    for($i = $F; $i < $E; $i = $i + $S){
-                        print $Pre;
-                        print $i;
-                        print $Post;
+            try{
+                f($_POST){
+                    $F = $_POST['F'];
+                    $E = $_POST['E'];
+                    $S = $_POST['S'];
+                    $Pre = $_POST['Pre'];
+                    $Post = $_POST['Post'];
+    
+                    if($F == ""){
+                        $F = 0;
                     }
+                    if($S == ""){
+                        $S = 1;
+                    }
+    
+                    if(is_numeric($F) && is_numeric($E) && is_numeric($S)){
+                        for($i = $F; $i < $E; $i = $i + $S){
+                            print $Pre;
+                            print $i;
+                            print $Post;
+                        }
+                    }
+                    else{
+                        print "エラー";
                 }
-                else{
-                    print "エラー";
+                }
+                else {
+                    print "エラー"
+                }
             }
-            }
-            else {
-                print "エラー"
-            }
-            
+            catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }       
             ?>
     </body>
 </html>
