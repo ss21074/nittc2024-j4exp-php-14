@@ -51,13 +51,15 @@
                     $優先順位 = $_POST['優先順位'];
                     $担当者 = $_POST['担当者'];
                     $イシューコミットID = $_POST['イシューコミットID'];
-
+                    print $ユーザ名;
+                    print $レポジトリ名;
+                    print $イシュータイトル;
 
                     $stmt = $pdo->prepare("INSERT INTO issues (title,label,priority,issue_commit) VALUES (:イシュータイトル, :ラベル, :優先順位, :イシューコミットID)");
                     
                     $stmt->bindParam(':イシュータイトル', $イシュータイトル, PDO::PARAM_STR);
                     $stmt->bindParam(':ラベル', $ラベル, PDO::PARAM_STR);
-                    $stmt->bindParam(':優先順位', $優先順位, PDO::PARAM_STR);
+                    $stmt->bindParam(':優先順位', $優先順位, PDO::PARAM_INT);
                     $stmt->bindParam(':イシューコミットID', $イシューコミットID, PDO::PARAM_STR);
                     
                     $stmt->execute();
