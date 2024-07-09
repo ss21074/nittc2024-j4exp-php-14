@@ -43,11 +43,32 @@
                     echo "Connection failed: " . $e->getMessage();
                 }
                 
-                $result = $connect->query("SELECT * FROM order;");
-                foreach($results as $row) {
-                ?><?=row["item"]?> : <?=row["price"]?><br>
-                <?php
-                }
+                $ユーザ名 = $_POST['ユーザ名'];
+                $レポジトリ名 = $_POST['レポジトリ名'];
+                $イシュータイトル = $_POST['イシュータイトル'];
+                $ラベル = $_POST['ラベル'];
+                $優先順位 = $_POST['優先順位'];
+                $担当者 = $_POST['担当者'];
+                $イシューコミットID = $_POST['イシューコミットID'];
+
+
+                $stmt = $pdo->prepare("INSERT INTO users (ユーザ名, レポジトリ名,イシュータイトル,ラベル,優先順位,担当者,イシューコミットID) VALUES (:ユーザ名, :レポジトリ名, :イシュータイトル, :ラベル, :優先順位, :担当者, :イシューコミットID)");
+                $stmt->bindParam(':ユーザ名', $ユーザ名, PDO::PARAM_STR);
+                $stmt->bindParam(':レポジトリ名', $レポジトリ名, PDO::PARAM_STR);
+                $stmt->bindParam(':イシュータイトル', $イシュータイトル, PDO::PARAM_STR);
+                $stmt->bindParam(':ラベル', $ラベル, PDO::PARAM_STR);
+                $stmt->bindParam(':優先順位', $優先順位, PDO::PARAM_STR);
+                $stmt->bindParam(':担当者', $担当者, PDO::PARAM_STR);
+                $stmt->bindParam(':イシューコミットID', $イシューコミットID, PDO::PARAM_STR);
+                
+                $stmt->execute();
+
+
+
+
+
+                
+                
 
 
             ?>
