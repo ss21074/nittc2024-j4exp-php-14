@@ -30,6 +30,7 @@
             <label>イシューコミットID:</label>
             <input type="text" name="イシューコミットID" size=5>
             <br>
+            <input type="submit" value="送信">
         </from>
             <?php
                 try {
@@ -52,23 +53,24 @@
                 $イシューコミットID = $_POST['イシューコミットID'];
 
 
-                $stmt = $pdo->prepare("INSERT INTO users (ユーザ名, レポジトリ名,イシュータイトル,ラベル,優先順位,担当者,イシューコミットID) VALUES (:ユーザ名, :レポジトリ名, :イシュータイトル, :ラベル, :優先順位, :担当者, :イシューコミットID)");
-                $stmt->bindParam(':ユーザ名', $ユーザ名, PDO::PARAM_STR);
-                $stmt->bindParam(':レポジトリ名', $レポジトリ名, PDO::PARAM_STR);
+                $stmt = $pdo->prepare("INSERT INTO issues (title,label,priority,issue_commit) VALUES (:イシュータイトル, :ラベル, :優先順位, :イシューコミットID)");
+                
                 $stmt->bindParam(':イシュータイトル', $イシュータイトル, PDO::PARAM_STR);
                 $stmt->bindParam(':ラベル', $ラベル, PDO::PARAM_STR);
                 $stmt->bindParam(':優先順位', $優先順位, PDO::PARAM_STR);
-                $stmt->bindParam(':担当者', $担当者, PDO::PARAM_STR);
                 $stmt->bindParam(':イシューコミットID', $イシューコミットID, PDO::PARAM_STR);
                 
                 $stmt->execute();
 
+                $stmt = $pdo->prepare("INSERT INTO repos (username, reponame) VALUES (:ユーザ名, :レポジトリ名)");
 
-
-
-
+                $stmt->bindParam(':ユーザ名', $ユーザ名, PDO::PARAM_STR);
+                $stmt->bindParam(':レポジトリ名', $レポジトリ名, PDO::PARAM_STR);
                 
+                $stmt->execute();
                 
+
+
 
 
             ?>
