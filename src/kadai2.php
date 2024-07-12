@@ -48,22 +48,44 @@
                     $priority = $_POST['priority'];
                     $ID = $_POST['ID'];
                     
-                    $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_commit) VALUES (:title, :label, :priority, :issue_commit)");
+                    $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, ID) VALUES (:title, :label, :priority, :ID)");
                     $stmt->bindParam(':title', $title, PDO::PARAM_STR);
                     $stmt->bindParam(':label', $label, PDO::PARAM_STR);
                     $stmt->bindParam(':priority', $priority, PDO::PARAM_INT);
-                    $stmt->bindParam(':issue_commit', $ID, PDO::PARAM_STR);
+                    $stmt->bindParam(':ID', $ID, PDO::PARAM_STR);
                     $stmt->execute();
 
-                    $stmt = $pdo->prepare("INSERT INTO repos (username, reponame) VALUES (:username, :reponame)");
+                    $stmt = $pdo->prepare("INSERT INTO repos (username, reponame,id) VALUES (:username, :reponame, :id)");
                     $stmt->bindParam(':username', $user, PDO::PARAM_STR);
                     $stmt->bindParam(':reponame', $repo, PDO::PARAM_STR);
+                    $stmt->bindParam(':id', $ID, PDO::PARAM_STR);
                     $stmt->execute();
+
+                    $new_table = "SELECT
+                                *
+                                FROM repos 
+                                JOIN issues
+                                ON issues.issue_id = repos.id"
+                    $stmt = ($pdo->prepare($new_table));
+                    $stmt->execute();
+                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                        $answers[]=array(
+                            'username' =>$row['username'],
+                            'reponame' =>$row['reponame'],
+                            'issue_id' =>$row['issue_id'],
+                            'title' =>$row['title'],
+                            'label'=>$row['label'],
+                            'priority'=>$row['priority']
+                        );
+                        echo $value['username'];
 
                 }
                 catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
                 }
+
+
+
                 
             ?>
 
