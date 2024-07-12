@@ -48,7 +48,7 @@
                     $priority = $_POST['priority'];
                     $ID = $_POST['ID'];
                     
-                    $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, ID) VALUES (:title, :label, :priority, :ID)");
+                    $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
                     $stmt->bindParam(':title', $title);
                     $stmt->bindParam(':label', $label);
                     $stmt->bindParam(':priority', $priority);
