@@ -61,8 +61,8 @@
                     $stmt->bindParam(':id', $ID);
                     $stmt->execute();
 
-                    
-                    /*$new_table = "SELECT
+
+                    $new_table = "SELECT
                                 *
                                 FROM repos 
                                 JOIN issues
@@ -80,7 +80,7 @@
                             'label'=>$row['label'],
                             'priority'=>$row['priority']
                         );
-                        echo $value['username'];*/
+                        echo $value['username'];
 
                 }
                 catch (PDOException $e) {
