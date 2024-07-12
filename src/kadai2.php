@@ -68,7 +68,9 @@
                                 ON issues.issue_id = repos.id"
                     $stmt = ($pdo->prepare($new_table));
                     $stmt->execute();
-                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+
+
+                    /*while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         $answers[]=array(
                             'username' =>$row['username'],
                             'reponame' =>$row['reponame'],
@@ -77,7 +79,7 @@
                             'label'=>$row['label'],
                             'priority'=>$row['priority']
                         );
-                        echo $value['username'];
+                        echo $value['username'];*/
 
                 }
                 catch (PDOException $e) {
