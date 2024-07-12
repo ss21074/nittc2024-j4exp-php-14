@@ -49,16 +49,16 @@
                     $ID = $_POST['ID'];
                     
                     $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, ID) VALUES (:title, :label, :priority, :ID)");
-                    $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-                    $stmt->bindParam(':label', $label, PDO::PARAM_STR);
-                    $stmt->bindParam(':priority', $priority, PDO::PARAM_INT);
-                    $stmt->bindParam(':ID', $ID, PDO::PARAM_STR);
+                    $stmt->bindParam(':title', $title);
+                    $stmt->bindParam(':label', $label);
+                    $stmt->bindParam(':priority', $priority);
+                    $stmt->bindParam(':ID', $ID);
                     $stmt->execute();
 
                     $stmt = $pdo->prepare("INSERT INTO repos (username, reponame,id) VALUES (:username, :reponame, :id)");
-                    $stmt->bindParam(':username', $user, PDO::PARAM_STR);
-                    $stmt->bindParam(':reponame', $repo, PDO::PARAM_STR);
-                    $stmt->bindParam(':id', $ID, PDO::PARAM_STR);
+                    $stmt->bindParam(':username', $user);
+                    $stmt->bindParam(':reponame', $repo);
+                    $stmt->bindParam(':id', $ID);
                     $stmt->execute();
 
                     /*$new_table = "SELECT
