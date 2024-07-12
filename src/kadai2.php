@@ -17,8 +17,8 @@
             <br>
             <label>ラベル:</label>
             <select name="ラベル">
-                <option> バグ</option>
-                <option> 機能要求</option>
+                <option> bug</option>
+                <option> feature</option>
             </select>
             <br>
             <label>優先順位:</label>
@@ -44,20 +44,36 @@
                     echo "Connection failed: " . $e->getMessage();
                 }
                 try{
-                    $ユーザ名 = $_POST['ユーザ名'];
-                    $レポジトリ名 = $_POST['レポジトリ名'];
-                    $イシュータイトル = $_POST['イシュータイトル'];
-                    $ラベル = $_POST['ラベル'];
-                    $優先順位 = $_POST['優先順位'];
-                    $担当者 = $_POST['担当者'];
-                    $イシューコミットID = $_POST['イシューコミットID'];
+                    $user = $_POST['ユーザ名'];
+                    $repo = $_POST['レポジトリ名'];
+                    $title = $_POST['イシュータイトル'];
+                    $label = $_POST['ラベル'];
+                    $priority = $_POST['優先順位'];
+                    $ID = $_POST['イシューコミットID'];
                     print $ユーザ名;
                     print $レポジトリ名;
                     print $イシュータイトル;
-
-                    $stmt = $pdo->prepare("INSERT INTO issues (title,label,priority,issue_commit) VALUES ($イシュータイトル, $ラベル, $優先順位, $イシューコミットID)");
                     
-                    $stmt->bindParam('イシュータイトル', $イシュータイトル, PDO::PARAM_STR);
+                    $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_commit) VALUES (:title, :label, :priority, :issue_commit)");
+    
+                    // パラメータをバインド
+                    $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+                    $stmt->bindParam(':label', $label, PDO::PARAM_STR);
+                    $stmt->bindParam(':priority', $priority, PDO::PARAM_INT);
+                    $stmt->bindParam(':issue_commit', $ID, PDO::PARAM_STR);
+                    
+                    // ステートメントを実行
+                    $stmt->execute();
+
+                    // 'repos' テーブルにデータを挿入する準備
+                    $stmt = $pdo->prepare("INSERT INTO repos (username, reponame) VALUES (:username, :reponame)");
+
+                    // パラメータをバインド
+                    $stmt->bindParam(':username', $user, PDO::PARAM_STR);
+                    $stmt->bindParam(':reponame', $repo, PDO::PARAM_STR);
+
+
+                    /*$stmt->bindParam('イシュータイトル', $イシュータイトル, PDO::PARAM_STR);
                     $stmt->bindParam('ラベル', $ラベル, PDO::PARAM_STR);
                     $stmt->bindParam('優先順位', $優先順位, PDO::PARAM_INT);
                     $stmt->bindParam('イシューコミットID', $イシューコミットID, PDO::PARAM_STR);
@@ -68,7 +84,7 @@
 
                     $stmt->bindParam('ユーザ名', $ユーザ名, PDO::PARAM_STR);
                     $stmt->bindParam('レポジトリ名', $レポジトリ名, PDO::PARAM_STR);
-                    
+                    */
                     $stmt->execute();
 
                 }
@@ -76,16 +92,7 @@
                     echo "Connection failed: " . $e->getMessage();
                 }
                 
-                
-
-
-
-
-
             ?>
-        
-
-
 
     </body>
 </html>
