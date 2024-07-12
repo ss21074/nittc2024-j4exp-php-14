@@ -61,7 +61,7 @@
                     $stmt->bindParam(':id', $ID, PDO::PARAM_STR);
                     $stmt->execute();
 
-                    $new_table = "SELECT
+                    /*$new_table = "SELECT
                                 *
                                 FROM repos 
                                 JOIN issues
@@ -70,7 +70,7 @@
                     $stmt->execute();
 
 
-                    /*while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         $answers[]=array(
                             'username' =>$row['username'],
                             'reponame' =>$row['reponame'],
