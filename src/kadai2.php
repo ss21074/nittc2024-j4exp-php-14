@@ -62,27 +62,6 @@
                     $stmt->execute();
 
 
-                    $new_table = "SELECT
-                                *
-                                FROM repos 
-                                JOIN issues
-                                ON issues.issue_id = repos.id"
-                    $stmt = ($pdo->prepare($new_table));
-                    $stmt->execute();
-
-
-                    while($stmt->fetch(PDO::FETCH_ASSOC) != false){
-                        $row = $stmt->fetch(PDO::FETCH_ASSOC)
-                        $answers[]=array(
-                            'username' =>$row['username'],
-                            'reponame' =>$row['reponame'],
-                            'issue_id' =>$row['issue_id'],
-                            'title' =>$row['title'],
-                            'label'=>$row['label'],
-                            'priority'=>$row['priority']
-                        );
-                        echo $answers['username'];
-                    }
                 }
                 catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
