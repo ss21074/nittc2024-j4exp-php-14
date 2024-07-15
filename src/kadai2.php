@@ -49,27 +49,37 @@
                     $ID = $_POST['ID'];
                     
                     if($user != null && $repo != null && $title != null && $label != null && $priority != null && $ID != null){
-                        $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
-                        $stmt->bindParam(':title', $title);
-                        $stmt->bindParam(':label', $label);
-                        $stmt->bindParam(':priority', $priority);
-                        $stmt->bindParam(':ID', $ID);
-                        $stmt->execute();
+                        $stmt_issues = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
+                        $stmt_issues->bindParam(':title', $title);
+                        $stmt_issues->bindParam(':label', $label);
+                        $stmt_issues->bindParam(':priority', $priority);
+                        $stmt_issues->bindParam(':ID', $ID);
+                        $stmt_issues->execute();
 
-                        $stmt = $pdo->prepare("INSERT INTO repos (username, reponame,id) VALUES (:username, :reponame, :id)");
-                        $stmt->bindParam(':username', $user);
-                        $stmt->bindParam(':reponame', $repo);
-                        $stmt->bindParam(':id', $ID);
-                        $stmt->execute();
+                        $stmt_repos = $pdo->prepare("INSERT INTO repos (username, reponame,id) VALUES (:username, :reponame, :id)");
+                        $stmt_repos->bindParam(':username', $user);
+                        $stmt_repos->bindParam(':reponame', $repo);
+                        $stmt_repos->bindParam(':id', $ID);
+                        $stmt_repos->execute();
 
                     }
 
 
 
-                    //$new_table = "SELECT * FROM repos JOIN issues ON issues.issue_id = repos.id"
-                    //$stmt = $pdo->prepare($new_table);
-                    //$stmt->execute();
-                    
+                    $new_table = "SELECT * FROM repos JOIN issues ON issues.issue_id = repos.id"
+                    $stmt = $pdo->prepare($new_table);
+                    $stmt->execute();
+
+                    while($stmt->fetch(PDO::FETCH_ASSOC) != false){
+                        $row = $stmt->fetch(PDO::FETCH_ASSOC)
+                        $answers[]=array(
+                            'username' =>$row['username'],
+                            'reponame' =>$row['reponame'],
+                            'label'=>$row['label'],
+                            'priority'=>$row['priority']
+                        );
+                        echo $answers['username'];
+                    }
                     
 
 
