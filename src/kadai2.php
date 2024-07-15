@@ -66,12 +66,17 @@
 
 
 
-                    $new_table = "SELECT * FROM repos JOIN issues ON issues.issue_id = repos.id"
+                    $new_table = "SELECT * FROM repos JOIN issues ON issues.issue_id = repos.id";
                     $stmt = $pdo->prepare($new_table);
                     $stmt->execute();
 
-                    while($stmt->fetch(PDO::FETCH_ASSOC) != false){
+                    /*while($stmt->fetch(PDO::FETCH_ASSOC) != false){
                         $row = $stmt->fetch(PDO::FETCH_ASSOC)
+                        //print "username: " . $row['username'] . "<br>";
+                        //print "reponame: " . $row['reponame'] . "<br>";
+                        //print "label: " . $row['label'] . "<br>";
+                        //print "priority: " . $row['priority'] . "<br><br>";
+
                         $answers[]=array(
                             'username' =>$row['username'],
                             'reponame' =>$row['reponame'],
@@ -79,6 +84,13 @@
                             'priority'=>$row['priority']
                         );
                         echo $answers['username'];
+
+                    }*/
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "username: " . $row['username'] . "<br>";
+                        echo "reponame: " . $row['reponame'] . "<br>";
+                        echo "label: " . $row['label'] . "<br>";
+                        echo "priority: " . $row['priority'] . "<br><br>";
                     }
                     
 
