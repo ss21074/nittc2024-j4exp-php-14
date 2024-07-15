@@ -48,24 +48,28 @@
                     $priority = $_POST['priority'];
                     $ID = $_POST['ID'];
                     
-                    $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
-                    $stmt->bindParam(':title', $title);
-                    $stmt->bindParam(':label', $label);
-                    $stmt->bindParam(':priority', $priority);
-                    $stmt->bindParam(':ID', $ID);
-                    $stmt->execute();
+                    if($user != null && $repo != null && $title != null $label != null && $priority != null $ID != null){
+                        $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
+                        $stmt->bindParam(':title', $title);
+                        $stmt->bindParam(':label', $label);
+                        $stmt->bindParam(':priority', $priority);
+                        $stmt->bindParam(':ID', $ID);
+                        $stmt->execute();
 
-                    $stmt = $pdo->prepare("INSERT INTO repos (username, reponame,id) VALUES (:username, :reponame, :id)");
-                    $stmt->bindParam(':username', $user);
-                    $stmt->bindParam(':reponame', $repo);
-                    $stmt->bindParam(':id', $ID);
-                    $stmt->execute();
+                        $stmt = $pdo->prepare("INSERT INTO repos (username, reponame,id) VALUES (:username, :reponame, :id)");
+                        $stmt->bindParam(':username', $user);
+                        $stmt->bindParam(':reponame', $repo);
+                        $stmt->bindParam(':id', $ID);
+                        $stmt->execute();
+
+                    }
 
 
                     $new_table = "SELECT * FROM repos JOIN issues ON issues.issue_id = repos.id"
                     $stmt = $pdo->prepare($new_table);
                     $stmt->execute();
-
+                    
+                    
 
 
                 }
