@@ -48,7 +48,7 @@
                     $priority = $_POST['priority'];
                     $ID = $_POST['ID'];
                     
-                    if($user != null && $repo != null && $title != null $label != null && $priority != null $ID != null){
+                    if($user != null && $repo != null && $title != null $label != null && $priority != null && $ID != null){
                         $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
                         $stmt->bindParam(':title', $title);
                         $stmt->bindParam(':label', $label);
