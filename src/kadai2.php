@@ -71,7 +71,8 @@
                     $stmt->execute();
 
 
-                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    while($stmt->fetch(PDO::FETCH_ASSOC) != false){
+                        $row = $stmt->fetch(PDO::FETCH_ASSOC)
                         $answers[]=array(
                             'username' =>$row['username'],
                             'reponame' =>$row['reponame'],
@@ -80,8 +81,8 @@
                             'label'=>$row['label'],
                             'priority'=>$row['priority']
                         );
-                        echo $value['username'];
-
+                        echo $answers['username'];
+                    }
                 }
                 catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
