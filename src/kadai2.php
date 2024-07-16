@@ -72,8 +72,7 @@
                     $stmt->execute();
 
                     
-                    echo "<table>";
-                    /*if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    echo "<table border='1'>";
                         echo "<tr>";
                             echo "<td>" . "ユーザ名" . "</td>";
                             echo "<td>" . "レポジトリ名" . "</td>";
@@ -82,7 +81,6 @@
                             echo "<td>" . "優先順位" . "</td>";
                             echo "<td>" . "イシューコミットID" . "</td>";
                         echo "</tr>";
-                    }*/
 
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
