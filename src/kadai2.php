@@ -81,10 +81,10 @@
                             echo "</tr>";
 
                     
-                    $sql = "SELECT * FROM $stmt ORDER BY priority DESC";
+                    /*$sql = "SELECT * FROM $stmt ORDER BY priority DESC";
                     $result = mysqli_query( $pdo, $sql );
                     
-                    if( mysqli_num_rows( $result ) > 0 ){
+                    if( mysqli_num_rows( $result ) > 0 ){*/
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                             echo "<tr>";
                                 echo "<td>" . $row['username'] . "</td>";
@@ -104,7 +104,7 @@
                         echo "</table>";
                     }
 
-                }
+                //}
                 catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
                 }
