@@ -69,6 +69,11 @@
                     $stmt = $pdo->prepare($new_table);
                     $stmt->execute();
 
+                    $sql = "SELECT * FROM $new_table ORDER BY priority DESC";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute();
+                    //$result = mysqli_query( $pdo, $sql );
+
                     echo "<br>";
                     echo "<table border='1'>";
                             echo "<tr>";
@@ -80,31 +85,26 @@
                                 echo "<td>" . "イシューコミットID" . "</td>";
                             echo "</tr>";
 
-                    
-                    /*$sql = "SELECT * FROM $stmt ORDER BY priority DESC";
-                    $result = mysqli_query( $pdo, $sql );
-                    
-                    if( mysqli_num_rows( $result ) > 0 ){*/
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo "<tr>";
-                                echo "<td>" . $row['username'] . "</td>";
-                                echo "<td>" . $row['reponame'] . "</td>";
-                                echo "<td>" . $row['title'] . "</td>";
-                                if($row['label'] == "bug"){
-                                    $row['label'] = "バグ";
-                                }
-                                else if($row['label'] == "feature"){
-                                    $row['label'] = "機能要求";
-                                }
-                                echo "<td>" . $row['label'] . "</td>";
-                                echo "<td>" . $row['priority'] . "</td>";
-                                echo "<td>" . $row['issue_id'] . "</td>";
-                            echo "</tr>";
-                        }
-                        echo "</table>";
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr>";
+                            echo "<td>" . $row['username'] . "</td>";
+                            echo "<td>" . $row['reponame'] . "</td>";
+                            echo "<td>" . $row['title'] . "</td>";
+                            if($row['label'] == "bug"){
+                                $row['label'] = "バグ";
+                            }
+                            else if($row['label'] == "feature"){
+                                $row['label'] = "機能要求";
+                            }
+                            echo "<td>" . $row['label'] . "</td>";
+                            echo "<td>" . $row['priority'] . "</td>";
+                            echo "<td>" . $row['issue_id'] . "</td>";
+                        echo "</tr>";
                     }
+                    echo "</table>";
+                    
 
-                //}
+                }
                 catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
                 }
