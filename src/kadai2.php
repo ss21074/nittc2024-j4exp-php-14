@@ -72,7 +72,29 @@
                     $stmt = $pdo->prepare($new_table);
                     $stmt->execute();
 
-                    /*
+                   
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "username: " . $row['username'] . "<br>";
+                        echo "reponame: " . $row['reponame'] . "<br>";
+                        echo "label: " . $row['label'] . "<br>";
+                        echo "priority: " . $row['priority'] . "<br><br>";
+
+                       
+                    }
+                }
+                catch (PDOException $e) {
+                    echo "Connection failed: " . $e->getMessage();
+                }
+
+
+
+
+                //echo "username: " . $row['username'] . "<br>";
+                //echo "reponame: " . $row['reponame'] . "<br>";
+                //echo "label: " . $row['label'] . "<br>";
+                //echo "priority: " . $row['priority'] . "<br><br>";
+
+                 /*
                     echo "<table border='1'>";
                         echo "<tr>";
                             echo "<td>" . "ユーザ名" . "</td>";
@@ -97,26 +119,6 @@
                     }
                     echo "</table>";
                     */
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "username: " . $row['username'] . "<br>";
-                        echo "reponame: " . $row['reponame'] . "<br>";
-                        echo "label: " . $row['label'] . "<br>";
-                        echo "priority: " . $row['priority'] . "<br><br>";
-
-                       
-                    }
-                }
-                catch (PDOException $e) {
-                    echo "Connection failed: " . $e->getMessage();
-                }
-
-
-
-
-                //echo "username: " . $row['username'] . "<br>";
-                //echo "reponame: " . $row['reponame'] . "<br>";
-                //echo "label: " . $row['label'] . "<br>";
-                //echo "priority: " . $row['priority'] . "<br><br>";
             ?>
 
     </body>
