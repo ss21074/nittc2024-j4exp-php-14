@@ -29,7 +29,6 @@
             <br>
             <input type="submit" value="送信">
         </from>
-
             <?php
                 try {
                     $pdo = new PDO("pgsql:host=dpg-cq6cq24s1f4s73e07gbg-a;
@@ -49,8 +48,7 @@
                     $priority = $_POST['priority'];
                     $ID = $_POST['ID'];
                     
-                    if($user != NULL && $repo != NULL && $title != NULL && $label != NULL && $priority != NULL && $ID != NULL){
-                        echo "GFGCDRTDRTFCVGHCGJC";
+                    if($user != null && $repo != null && $title != null && $label != null && $priority != null && $ID != null){
                         $stmt_issues = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
                         $stmt_issues->bindParam(':title', $title);
                         $stmt_issues->bindParam(':label', $label);
@@ -72,39 +70,31 @@
                     $stmt = $pdo->prepare($new_table);
                     $stmt->execute();
 
-                    /*
-                    echo "<table border='1'>";
-                        echo "<tr>";
-                            echo "<td>" . "ユーザ名" . "</td>";
-                            echo "<td>" . "レポジトリ名" . "</td>";
-                            echo "<td>" . "イシュータイトル" . "</td>";
-                            echo "<td>" . "ラベル" . "</td>";
-                            echo "<td>" . "優先順位" . "</td>";
-                            echo "<td>" . "イシューコミットID" . "</td>";
-                        echo "</tr>";
+                    /*while($stmt->fetch(PDO::FETCH_ASSOC) != false){
+                        $row = $stmt->fetch(PDO::FETCH_ASSOC)
+                        //print "username: " . $row['username'] . "<br>";
+                        //print "reponame: " . $row['reponame'] . "<br>";
+                        //print "label: " . $row['label'] . "<br>";
+                        //print "priority: " . $row['priority'] . "<br><br>";
 
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<tr>";
-                            echo "<td>" . $row['username'] . "</td>";
-                            echo "<td>" . $row['reponame'] . "</td>";
-                            echo "<td>" . $row['title'] . "</td>";
-                            echo "<td>" . $row['label'] . "</td>";
-                            echo "<td>" . $row['priority'] . "</td>";
-                            echo "<td>" . $row['issue_id'] . "</td>";
-                        echo "</tr>";
+                        $answers[]=array(
+                            'username' =>$row['username'],
+                            'reponame' =>$row['reponame'],
+                            'label'=>$row['label'],
+                            'priority'=>$row['priority']
+                        );
+                        echo $answers['username'];
 
-                       
-                    }
-                    echo "</table>";
-                    */
+                    }*/
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "username: " . $row['username'] . "<br>";
                         echo "reponame: " . $row['reponame'] . "<br>";
                         echo "label: " . $row['label'] . "<br>";
                         echo "priority: " . $row['priority'] . "<br><br>";
-
-                       
                     }
+                    
+
+
                 }
                 catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
@@ -113,13 +103,8 @@
 
 
 
-                //echo "username: " . $row['username'] . "<br>";
-                //echo "reponame: " . $row['reponame'] . "<br>";
-                //echo "label: " . $row['label'] . "<br>";
-                //echo "priority: " . $row['priority'] . "<br><br>";
+                
             ?>
 
     </body>
 </html>
-
-
