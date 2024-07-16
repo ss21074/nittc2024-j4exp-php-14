@@ -72,7 +72,7 @@
                     $stmt = $pdo->prepare($new_table);
                     $stmt->execute();
 
-                   
+                   echo "<br>"
                     echo "<table border='1'>";
                             echo "<tr>";
                                 echo "<td>" . "ユーザ名" . "</td>";
