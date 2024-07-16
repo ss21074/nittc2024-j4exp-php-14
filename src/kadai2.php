@@ -90,7 +90,7 @@
                             echo "<td>" . $row['title'] . "</td>";
                             echo "<td>" . $row['label'] . "</td>";
                             echo "<td>" . $row['priority'] . "</td>";
-                            echo "<td>" . $row['issue_id'] . "</td>";
+                            echo "<td>" . $row['ID'] . "</td>";
                         echo "</tr>";
                     }
                     echo "</table>";
