@@ -72,7 +72,7 @@
                     $stmt->execute();
 
                     
-                    echo "<table border='1'>";
+                    echo "<table>";
                     /*if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         echo "<tr>";
                             echo "<td>" . "ユーザ名" . "</td>";
@@ -92,7 +92,7 @@
                             echo "<td>" . $row['label'] . "</td>";
                             echo "<td>" . $row['priority'] . "</td>";
                             echo "<td>" . $row['ID'] . "</td>";
-                        echo "</tr>";*/
+                        echo "</tr>";
 
                         //echo "username: " . $row['username'] . "<br>";
                         //echo "reponame: " . $row['reponame'] . "<br>";
