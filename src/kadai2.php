@@ -15,11 +15,12 @@
             <label>イシュータイトル:</label>
             <input type="text" name="title" size=5>
             <br>
-            <label>ラベル:</label>
-            <select name="label">
-                <option> バグ</option>
-                <option> 機能要求</option>
-            </select>
+
+            <input type="radio" name="label" />バグ
+            <input type="radio" name="label" />機能要求
+
+            
+
             <br>
             <label>優先順位:</label>
             <input type="text" name="priority" size=5>
@@ -79,7 +80,7 @@
                     $stmt = $pdo->prepare($new_table);
                     $stmt->execute();
 
-                   echo "<br>";
+                    echo "<br>";
                     echo "<table border='1'>";
                             echo "<tr>";
                                 echo "<td>" . "ユーザ名" . "</td>";
@@ -90,6 +91,12 @@
                                 echo "<td>" . "イシューコミットID" . "</td>";
                             echo "</tr>";
 
+                    if($label == "bug"){
+                        $label = "バグ";
+                    }
+                    else if($label == "feature"){
+                        $label = "機能要求";
+                    }
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                             echo "<td>" . $row['username'] . "</td>";
