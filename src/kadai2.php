@@ -94,11 +94,14 @@
                             echo "</tr>";
 
                     if($row['label'] == "bug"){
+                        echo "rrrr";
                         $row['label'] = "バグ";
                     }
                     else if($row['label'] == "feature"){
                         $row['label'] = "機能要求";
+                        echo "aaaaa";
                     }
+                    
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                             echo "<td>" . $row['username'] . "</td>";
