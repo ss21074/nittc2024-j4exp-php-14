@@ -91,12 +91,13 @@
                                 echo "<td>" . "イシューコミットID" . "</td>";
                             echo "</tr>";
 
-                    if($label == "bug"){
+                    /*if($label == "bug"){
                         $label = "バグ";
                     }
                     else if($label == "feature"){
                         $label = "機能要求";
-                    }
+                    }*/
+
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                             echo "<td>" . $row['username'] . "</td>";
