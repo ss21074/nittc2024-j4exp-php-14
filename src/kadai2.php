@@ -71,24 +71,8 @@
                     $stmt = $pdo->prepare($new_table);
                     $stmt->execute();
 
-                    /*while($stmt->fetch(PDO::FETCH_ASSOC) != false){
-                        $row = $stmt->fetch(PDO::FETCH_ASSOC)
-                        //print "username: " . $row['username'] . "<br>";
-                        //print "reponame: " . $row['reponame'] . "<br>";
-                        //print "label: " . $row['label'] . "<br>";
-                        //print "priority: " . $row['priority'] . "<br><br>";
-
-                        $answers[]=array(
-                            'username' =>$row['username'],
-                            'reponame' =>$row['reponame'],
-                            'label'=>$row['label'],
-                            'priority'=>$row['priority']
-                        );
-                        echo $answers['username'];
-
-                    }*/
-
-                    echo "<table border='1'>";
+                    
+                    //echo "<table>";
                     /*if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         echo "<tr>";
                             echo "<td>" . "ユーザ名" . "</td>";
@@ -114,8 +98,8 @@
                         echo "reponame: " . $row['reponame'] . "<br>";
                         echo "label: " . $row['label'] . "<br>";
                         echo "priority: " . $row['priority'] . "<br><br>";
-                    }
-                    echo "</table>";
+                    //}
+                    //echo "</table>";
 
 
                 }
