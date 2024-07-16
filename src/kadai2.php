@@ -84,18 +84,13 @@
 
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
-                            echo "<td>" . $row['username'] . "</td>";
-                            echo "<td>" . $row['reponame'] . "</td>";
-                            echo "<td>" . $row['title'] . "</td>";
-                            echo "<td>" . $row['label'] . "</td>";
-                            echo "<td>" . $row['priority'] . "</td>";
-                            echo "<td>" . $row['issue_id'] . "</td>";
+                        echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['reponame']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['title']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['label']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['priority']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['issue_id']) . "</td>";
                         echo "</tr>";
-
-                        //echo "username: " . $row['username'] . "<br>";
-                        //echo "reponame: " . $row['reponame'] . "<br>";
-                        //echo "label: " . $row['label'] . "<br>";
-                        //echo "priority: " . $row['priority'] . "<br><br>";
                     }
                     echo "</table>";
 
