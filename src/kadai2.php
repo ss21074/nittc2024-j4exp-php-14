@@ -89,7 +89,7 @@
                             echo "<td>" . $row['title'] . "</td>";
                             echo "<td>" . $row['label'] . "</td>";
                             echo "<td>" . $row['priority'] . "</td>";
-                            echo "<td>" . $row['ID'] . "</td>";
+                            echo "<td>" . $row['issue_id'] . "</td>";
                         echo "</tr>";
 
                         //echo "username: " . $row['username'] . "<br>";
