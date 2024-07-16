@@ -17,8 +17,8 @@
             <br>
             <label>ラベル:</label>
             <select name="label">
-                <option> bug</option>
-                <option> feature</option>
+                <option> バグ</option>
+                <option> 機能要求</option>
             </select>
             <br>
             <label>優先順位:</label>
@@ -48,6 +48,13 @@
                     $label = $_POST['label'];
                     $priority = $_POST['priority'];
                     $ID = $_POST['ID'];
+
+                    if($label == "バグ"){
+                        $label = "bug";
+                    }
+                    else if($label == "機能要求"){
+                        $label = "feature";
+                    }
                     
                     if (!empty($user) && !empty($repo) && !empty($title) && !empty($label) && !empty($priority) && !empty($ID)) {
                         echo "GFGCDRTDRTFCVGHCGJC";
