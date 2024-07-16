@@ -16,10 +16,12 @@
             <input type="text" name="title" size=5>
             <br>
 
-            <input type="radio" name="label" />バグ
-            <input type="radio" name="label" />機能要求
 
-            
+            <label>ラベル:</label>
+            <select name="label">
+                <option> バグ</option>
+                <option> 機能要求</option>
+            </select>
 
             <br>
             <label>優先順位:</label>
@@ -91,13 +93,12 @@
                                 echo "<td>" . "イシューコミットID" . "</td>";
                             echo "</tr>";
 
-                    /*if($label == "bug"){
+                    if($label == "bug"){
                         $label = "バグ";
                     }
                     else if($label == "feature"){
                         $label = "機能要求";
-                    }*/
-
+                    }
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                             echo "<td>" . $row['username'] . "</td>";
