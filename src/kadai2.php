@@ -49,7 +49,6 @@
                     $ID = $_POST['ID'];
                     
                     if (!empty($user) && !empty($repo) && !empty($title) && !empty($label) && !empty($priority) && !empty($ID)) {
-                        echo "GFGCDRTDRTFCVGHCGJC";
                         $stmt_issues = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
                         $stmt_issues->bindParam(':title', $title);
                         $stmt_issues->bindParam(':label', $label);
@@ -82,26 +81,28 @@
                             echo "</tr>";
 
                     
-
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<tr>";
-                            echo "<td>" . $row['username'] . "</td>";
-                            echo "<td>" . $row['reponame'] . "</td>";
-                            echo "<td>" . $row['title'] . "</td>";
-                            if($row['label'] == "bug"){
-                                echo "rrrr";
-                                $row['label'] = "バグ";
-                            }
-                            else if($row['label'] == "feature"){
-                                $row['label'] = "機能要求";
-                                echo "aaaaa";
-                            }
-                            echo "<td>" . $row['label'] . "</td>";
-                            echo "<td>" . $row['priority'] . "</td>";
-                            echo "<td>" . $row['issue_id'] . "</td>";
-                        echo "</tr>";
+                    $sql = "SELECT * FROM $stmt ORDER BY priority DESC";
+                    $result = mysqli_query( $pdo, $sql );
+                    
+                    if( mysqli_num_rows( $result ) > 0 ){
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo "<tr>";
+                                echo "<td>" . $row['username'] . "</td>";
+                                echo "<td>" . $row['reponame'] . "</td>";
+                                echo "<td>" . $row['title'] . "</td>";
+                                if($row['label'] == "bug"){
+                                    $row['label'] = "バグ";
+                                }
+                                else if($row['label'] == "feature"){
+                                    $row['label'] = "機能要求";
+                                }
+                                echo "<td>" . $row['label'] . "</td>";
+                                echo "<td>" . $row['priority'] . "</td>";
+                                echo "<td>" . $row['issue_id'] . "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
                     }
-                    echo "</table>";
 
                 }
                 catch (PDOException $e) {
@@ -109,36 +110,6 @@
                 }
 
 
-                //echo "username: " . $row['username'] . "<br>";
-                //echo "reponame: " . $row['reponame'] . "<br>";
-                //echo "label: " . $row['label'] . "<br>";
-                //echo "priority: " . $row['priority'] . "<br><br>";
-
-                 /*
-                    echo "<table border='1'>";
-                        echo "<tr>";
-                            echo "<td>" . "ユーザ名" . "</td>";
-                            echo "<td>" . "レポジトリ名" . "</td>";
-                            echo "<td>" . "イシュータイトル" . "</td>";
-                            echo "<td>" . "ラベル" . "</td>";
-                            echo "<td>" . "優先順位" . "</td>";
-                            echo "<td>" . "イシューコミットID" . "</td>";
-                        echo "</tr>";
-
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<tr>";
-                            echo "<td>" . $row['username'] . "</td>";
-                            echo "<td>" . $row['reponame'] . "</td>";
-                            echo "<td>" . $row['title'] . "</td>";
-                            echo "<td>" . $row['label'] . "</td>";
-                            echo "<td>" . $row['priority'] . "</td>";
-                            echo "<td>" . $row['issue_id'] . "</td>";
-                        echo "</tr>";
-
-                       
-                    }
-                    echo "</table>";
-                    */
             ?>
 
     </body>
