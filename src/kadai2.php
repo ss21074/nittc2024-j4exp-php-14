@@ -72,7 +72,7 @@
                     $stmt->execute();
 
                     
-                    //echo "<table>";
+                    echo "<table border='1'>";
                     /*if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         echo "<tr>";
                             echo "<td>" . "ユーザ名" . "</td>";
@@ -82,7 +82,7 @@
                             echo "<td>" . "優先順位" . "</td>";
                             echo "<td>" . "イシューコミットID" . "</td>";
                         echo "</tr>";
-                    }
+                    }*/
 
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
@@ -94,12 +94,12 @@
                             echo "<td>" . $row['ID'] . "</td>";
                         echo "</tr>";*/
 
-                        echo "username: " . $row['username'] . "<br>";
-                        echo "reponame: " . $row['reponame'] . "<br>";
-                        echo "label: " . $row['label'] . "<br>";
-                        echo "priority: " . $row['priority'] . "<br><br>";
-                    //}
-                    //echo "</table>";
+                        //echo "username: " . $row['username'] . "<br>";
+                        //echo "reponame: " . $row['reponame'] . "<br>";
+                        //echo "label: " . $row['label'] . "<br>";
+                        //echo "priority: " . $row['priority'] . "<br><br>";
+                    }
+                    echo "</table>";
 
 
                 }
