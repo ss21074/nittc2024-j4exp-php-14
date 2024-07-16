@@ -91,30 +91,29 @@
                     echo "<table border='1'>";
                     /*if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         echo "<tr>";
-                            echo "<td>" . "ユーザ名" . "<td>";
-                            echo "<td>" . "レポジトリ名" . "<td>";
-                            echo "<td>" . "イシュータイトル" . "<td>";
-                            echo "<td>" . "ラベル" . "<td>";
-                            echo "<td>" . "優先順位" . "<td>";
-                            echo "<td>" . "イシューコミットID" . "<td>";
+                            echo "<td>" . "ユーザ名" . "</td>";
+                            echo "<td>" . "レポジトリ名" . "</td>";
+                            echo "<td>" . "イシュータイトル" . "</td>";
+                            echo "<td>" . "ラベル" . "</td>";
+                            echo "<td>" . "優先順位" . "</td>";
+                            echo "<td>" . "イシューコミットID" . "</td>";
                         echo "</tr>";
-                    }*/
+                    }
 
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
-                            echo "<td>" . $row['username'] . "<td>";
-                            echo "<td>" . $row['reponame'] . "<td>";
-                            echo "<td>" . $row['title'] . "<td>";
-                            echo "<td>" . $row['label'] . "<td>";
-                            echo "<td>" . $row['priority'] . "<td>";
-                            echo "<td>" . $row['ID'] . "<td>";
-                        echo "</tr>";
+                            echo "<td>" . $row['username'] . "</td>";
+                            echo "<td>" . $row['reponame'] . "</td>";
+                            echo "<td>" . $row['title'] . "</td>";
+                            echo "<td>" . $row['label'] . "</td>";
+                            echo "<td>" . $row['priority'] . "</td>";
+                            echo "<td>" . $row['ID'] . "</td>";
+                        echo "</tr>";*/
 
-
-                        /*echo "username: " . $row['username'] . "<br>";
+                        echo "username: " . $row['username'] . "<br>";
                         echo "reponame: " . $row['reponame'] . "<br>";
                         echo "label: " . $row['label'] . "<br>";
-                        echo "priority: " . $row['priority'] . "<br><br>";*/
+                        echo "priority: " . $row['priority'] . "<br><br>";
                     }
                     echo "</table>";
 
