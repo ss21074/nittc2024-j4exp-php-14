@@ -16,8 +16,8 @@
             <input type="text" name="title" size=5>
             <br>
 
-            <input type="radio" name="label">バグ
-            <input type="radio" name="label">機能要求
+            <input type="radio" name="label" value = "bug">バグ
+            <input type="radio" name="label" value = "feature">機能要求
 
             <br>
             <label>優先順位:</label>
@@ -47,13 +47,6 @@
                     $label = $_POST['label'];
                     $priority = $_POST['priority'];
                     $ID = $_POST['ID'];
-
-                    if($label == "バグ"){
-                        $label = "bug";
-                    }
-                    else if($label == "機能要求"){
-                        $label = "feature";
-                    }
                     
                     if (!empty($user) && !empty($repo) && !empty($title) && !empty($label) && !empty($priority) && !empty($ID)) {
                         echo "GFGCDRTDRTFCVGHCGJC";
@@ -69,7 +62,6 @@
                         $stmt_repos->bindParam(':reponame', $repo);
                         $stmt_repos->bindParam(':id', $ID);
                         $stmt_repos->execute();
-
                     }
 
 
