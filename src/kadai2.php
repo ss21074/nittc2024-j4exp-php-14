@@ -58,10 +58,10 @@
                         $stmt_issues->bindParam(':ID', $ID);
                         $stmt_issues->execute();
 
-                        $stmt_repos = $pdo->prepare("INSERT INTO repos (username, reponame) VALUES (:username, :reponame)");
+                        $stmt_repos = $pdo->prepare("INSERT INTO repos (username, reponame,id) VALUES (:username, :reponame, :id)");
                         $stmt_repos->bindParam(':username', $user);
                         $stmt_repos->bindParam(':reponame', $repo);
-                        //$stmt_repos->bindParam(':id', $ID);
+                        $stmt_repos->bindParam(':id', $ID_2);
                         $stmt_repos->execute();
 
                     }
