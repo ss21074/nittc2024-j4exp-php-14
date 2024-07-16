@@ -7,28 +7,25 @@
         <form action = "kadai2.php" method = "post" >
             <br>
             <label>ユーザ名:</label>
-            <input type="text" name="ユーザ名" size=5>
+            <input type="text" name="user" size=5>
             <br>
             <label>レポジトリ名:</label>
-            <input type="text" name="レポジトリ名" size=5>
+            <input type="text" name="repo" size=5>
             <br>
             <label>イシュータイトル:</label>
-            <input type="text" name="イシュータイトル" size=5>
+            <input type="text" name="title" size=5>
             <br>
             <label>ラベル:</label>
-            <select name="ラベル">
+            <select name="label">
                 <option> bug</option>
                 <option> feature</option>
             </select>
             <br>
             <label>優先順位:</label>
-            <input type="text" name="優先順位" size=5>
-            <br>
-            <label>担当者:</label>
-            <input type="text" name="担当者" size=5>
+            <input type="text" name="priority" size=5>
             <br>
             <label>イシューコミットID:</label>
-            <input type="text" name="イシューコミットID" size=5>
+            <input type="text" name="ID" size=5>
             <br>
             <input type="submit" value="送信">
         </from>
@@ -44,53 +41,68 @@
                     echo "Connection failed: " . $e->getMessage();
                 }
                 try{
-                    $user = $_POST['ユーザ名'];
-                    $repo = $_POST['レポジトリ名'];
-                    $title = $_POST['イシュータイトル'];
-                    $label = $_POST['ラベル'];
-                    $priority = $_POST['優先順位'];
-                    $ID = $_POST['イシューコミットID'];
-                    print $ユーザ名;
-                    print $レポジトリ名;
-                    print $イシュータイトル;
+                    $user = $_POST['user'];
+                    $repo = $_POST['repo'];
+                    $title = $_POST['title'];
+                    $label = $_POST['label'];
+                    $priority = $_POST['priority'];
+                    $ID = $_POST['ID'];
                     
-                    $stmt = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_commit) VALUES (:title, :label, :priority, :issue_commit)");
-    
-                    // パラメータをバインド
-                    $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-                    $stmt->bindParam(':label', $label, PDO::PARAM_STR);
-                    $stmt->bindParam(':priority', $priority, PDO::PARAM_INT);
-                    $stmt->bindParam(':issue_commit', $ID, PDO::PARAM_STR);
-                    
-                    // ステートメントを実行
+                    if($user != null && $repo != null && $title != null && $label != null && $priority != null && $ID != null){
+                        $stmt_issues = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
+                        $stmt_issues->bindParam(':title', $title);
+                        $stmt_issues->bindParam(':label', $label);
+                        $stmt_issues->bindParam(':priority', $priority);
+                        $stmt_issues->bindParam(':ID', $ID);
+                        $stmt_issues->execute();
+
+                        $stmt_repos = $pdo->prepare("INSERT INTO repos (username, reponame,id) VALUES (:username, :reponame, :id)");
+                        $stmt_repos->bindParam(':username', $user);
+                        $stmt_repos->bindParam(':reponame', $repo);
+                        $stmt_repos->bindParam(':id', $ID);
+                        $stmt_repos->execute();
+
+                    }
+
+
+
+                    $new_table = "SELECT * FROM repos JOIN issues ON issues.issue_id = repos.id";
+                    $stmt = $pdo->prepare($new_table);
                     $stmt->execute();
 
-                    // 'repos' テーブルにデータを挿入する準備
-                    $stmt = $pdo->prepare("INSERT INTO repos (username, reponame) VALUES (:username, :reponame)");
+                    /*while($stmt->fetch(PDO::FETCH_ASSOC) != false){
+                        $row = $stmt->fetch(PDO::FETCH_ASSOC)
+                        //print "username: " . $row['username'] . "<br>";
+                        //print "reponame: " . $row['reponame'] . "<br>";
+                        //print "label: " . $row['label'] . "<br>";
+                        //print "priority: " . $row['priority'] . "<br><br>";
 
-                    // パラメータをバインド
-                    $stmt->bindParam(':username', $user, PDO::PARAM_STR);
-                    $stmt->bindParam(':reponame', $repo, PDO::PARAM_STR);
+                        $answers[]=array(
+                            'username' =>$row['username'],
+                            'reponame' =>$row['reponame'],
+                            'label'=>$row['label'],
+                            'priority'=>$row['priority']
+                        );
+                        echo $answers['username'];
 
-
-                    /*$stmt->bindParam('イシュータイトル', $イシュータイトル, PDO::PARAM_STR);
-                    $stmt->bindParam('ラベル', $ラベル, PDO::PARAM_STR);
-                    $stmt->bindParam('優先順位', $優先順位, PDO::PARAM_INT);
-                    $stmt->bindParam('イシューコミットID', $イシューコミットID, PDO::PARAM_STR);
+                    }*/
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "username: " . $row['username'] . "<br>";
+                        echo "reponame: " . $row['reponame'] . "<br>";
+                        echo "label: " . $row['label'] . "<br>";
+                        echo "priority: " . $row['priority'] . "<br><br>";
+                    }
                     
-                    $stmt->execute();
 
-                    $stmt = $pdo->prepare("INSERT INTO repos (username, reponame) VALUES (:ユーザ名, :レポジトリ名)");
-
-                    $stmt->bindParam('ユーザ名', $ユーザ名, PDO::PARAM_STR);
-                    $stmt->bindParam('レポジトリ名', $レポジトリ名, PDO::PARAM_STR);
-                    */
-                    $stmt->execute();
 
                 }
                 catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
                 }
+
+
+
+
                 
             ?>
 
