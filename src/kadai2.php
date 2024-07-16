@@ -16,12 +16,8 @@
             <input type="text" name="title" size=5>
             <br>
 
-
-            <label>ラベル:</label>
-            <select name="label">
-                <option> バグ</option>
-                <option> 機能要求</option>
-            </select>
+            <input type="radio" name="label">バグ
+            <input type="radio" name="label">機能要求
 
             <br>
             <label>優先順位:</label>
