@@ -69,7 +69,7 @@
                     $stmt = $pdo->prepare($new_table);
                     $stmt->execute();
 
-                    $sql = "SELECT * FROM $new_table ORDER BY priority DESC";
+                    $sql = "$new_table ORDER BY priority DESC";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute();
                     //$result = mysqli_query( $pdo, $sql );
