@@ -72,7 +72,6 @@
                     $sql = "$new_table ORDER BY priority DESC";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute();
-                    //$result = mysqli_query( $pdo, $sql );
 
                     echo "<br>";
                     echo "<table border='1'>";
@@ -83,6 +82,9 @@
                                 echo "<td>" . "ラベル" . "</td>";
                                 echo "<td>" . "優先順位" . "</td>";
                                 echo "<td>" . "イシューコミットID" . "</td>";
+                                echo "<td>" . "状態" . "</td>";
+                                echo "<td>" . "完了コミットID" . "</td>";
+                                echo "<td>" . "更新ボタン" . "</td>";
                             echo "</tr>";
 
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -99,6 +101,12 @@
                             echo "<td>" . $row['label'] . "</td>";
                             echo "<td>" . $row['priority'] . "</td>";
                             echo "<td>" . $row['issue_id'] . "</td>";
+                            echo "<select name='status'>";
+                                echo "<option>未着手</option>";
+                                echo "<option>着手中</option>";
+                                echo "<option>完了</option>";
+                            echo "</select>";
+                            echo "<input type='submit' value='更新'>"
                         echo "</tr>";
                     }
                     echo "</table>";
@@ -108,6 +116,10 @@
                 catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
                 }
+
+
+
+
 
 
             ?>
