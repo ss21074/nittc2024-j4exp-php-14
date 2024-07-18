@@ -106,7 +106,7 @@
                                 echo "<option>着手中</option>";
                                 echo "<option>完了</option>";
                             echo "</select>"."</td>";
-                            echo "<td>"."<input type='text' name='pID' size=5>"."</td>"
+                            echo "<td>"."<input type='text' name='pID' size=5>"."</td>";
                             echo "<td>"."<input type='submit' value='更新'>"."</td>";
                         echo "</tr>";
                     }
