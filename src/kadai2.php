@@ -99,7 +99,7 @@
                                 $row['label'] = "機能要求";
                             }
                             echo "<td>" . $row['label'] . "</td>";
-                            echo "<input type='text' name='priority' value=<?= $row['priority'] ?>>";
+                            echo "<input type='text' name='priority' value=".$row['priority'].">";
                             echo "<td>" . $row['priority'] . "</td>";
                             echo "<td>" . $row['issue_id'] . "</td>";
                             echo "<td>"."<select name='status'>";
