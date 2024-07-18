@@ -101,12 +101,13 @@
                             echo "<td>" . $row['label'] . "</td>";
                             echo "<td>" . $row['priority'] . "</td>";
                             echo "<td>" . $row['issue_id'] . "</td>";
-                            echo "<select name='status'>";
+                            echo "<td>"."<select name='status'>";
                                 echo "<option>未着手</option>";
                                 echo "<option>着手中</option>";
                                 echo "<option>完了</option>";
-                            echo "</select>";
-                            echo "<input type='submit' value='更新'>";
+                            echo "</select>"."</td>";
+                            echo "<td>"."<input type='text' name='pID' size=5>"."</td>"
+                            echo "<td>"."<input type='submit' value='更新'>"."</td>";
                         echo "</tr>";
                     }
                     echo "</table>";
