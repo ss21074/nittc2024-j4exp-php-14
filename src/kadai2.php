@@ -111,8 +111,10 @@
                                 echo "<option "." >完了</option>";
                             echo "</select>"."</td>";
                             echo "<td>"."<input type='text' name='pID' size=5>"."</td>";
+                            echo "<input type='hidden' name='update_id' value=",$row['issue_id'],">";
                             echo "<td>"."<input type='submit' value='更新' name='reload'>"."</td>";
                         echo "</tr>";
+
                     }
                     echo "</table>";
 
