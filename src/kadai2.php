@@ -42,9 +42,7 @@
                 }
 
                 try{
-                    if($reload = $_POST['reload']){
-                        $priority = $_POST['re_priority'];
-                    }
+                    
 
 
 
@@ -56,6 +54,10 @@
                     $priority = $_POST['priority'];
                     $ID = $_POST['ID'];
                     
+                    if($reload = $_POST['reload']){
+                        $priority = $_POST['re_priority'];
+                    }
+
                     if (!empty($user) && !empty($repo) && !empty($title) && !empty($label) && !empty($priority) && !empty($ID)) {
                         $stmt_issues = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
                         $stmt_issues->bindParam(':title', $title);
