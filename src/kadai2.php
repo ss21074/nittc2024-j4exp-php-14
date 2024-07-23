@@ -106,9 +106,9 @@
                             echo "<td>"."<input type='text' name='priority' value=".$row['priority'].">"."</td>";
                             echo "<td>" . $row['issue_id'] . "</td>";
                             echo "<td>"."<select name='status'>";
-                                echo "<option ". if($row["status"] == "not_started")echo "selected"; ." >未着手</option>";
-                                echo "<option ". if($row["status"] == "started")echo "selected"; ." >着手中</option>";
-                                echo "<option ". if($row["status"] == "complete")echo "selected"; ." >完了</option>";
+                                echo "<option " ." >未着手</option>";
+                                echo "<option " ." >着手中</option>";
+                                echo "<option "." >完了</option>";
                             echo "</select>"."</td>";
                             echo "<td>"."<input type='text' name='pID' size=5>"."</td>";
                             echo "<td>"."<input type='submit' value='更新' name='reload'>"."</td>";
