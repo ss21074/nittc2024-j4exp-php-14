@@ -41,11 +41,14 @@
                     echo "Connection failed: " . $e->getMessage();
                 }
 
-                if(isset($_POST["status"])){
-                    
-                }
-
                 try{
+                    if($reload = $_POST['reload']){
+                        $priority = $_POST['re_priority'];
+                    }
+
+
+
+
                     $user = $_POST['user'];
                     $repo = $_POST['repo'];
                     $title = $_POST['title'];
@@ -103,9 +106,9 @@
                             }
 
                             echo "<td>" . $row['label'] . "</td>";
-                            echo "<td>"."<input type='text' name='priority' value=".$row['priority'].">"."</td>";
+                            echo "<td>"."<input type='text' name='re_priority' value=".$row['priority'].">"."</td>";
                             echo "<td>" . $row['issue_id'] . "</td>";
-                            echo "<td>"."<select name='status'>";
+                            echo "<td>"."<select name='re_status'>";
                                 echo "<option " ." >未着手</option>";
                                 echo "<option " ." >着手中</option>";
                                 echo "<option "." >完了</option>";
@@ -117,20 +120,10 @@
 
                     }
                     echo "</table>";
-
-
-                    
-
                 }
                 catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
                 }
-
-
-
-
-
-
             ?>
 
     </body>
