@@ -40,6 +40,11 @@
                 catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
                 }
+
+                if(isset($_POST["status"])){
+                    
+                }
+
                 try{
                     $user = $_POST['user'];
                     $repo = $_POST['repo'];
@@ -62,8 +67,6 @@
                         $stmt_repos->bindParam(':id', $ID);
                         $stmt_repos->execute();
                     }
-
-
 
                     $new_table = "SELECT * FROM repos JOIN issues ON issues.issue_id = repos.id";
                     $stmt = $pdo->prepare($new_table);
@@ -98,19 +101,22 @@
                             else if($row['label'] == "feature"){
                                 $row['label'] = "機能要求";
                             }
+
                             echo "<td>" . $row['label'] . "</td>";
                             echo "<td>"."<input type='text' name='priority' value=".$row['priority'].">"."</td>";
                             echo "<td>" . $row['issue_id'] . "</td>";
                             echo "<td>"."<select name='status'>";
-                                echo "<option>未着手</option>";
-                                echo "<option>着手中</option>";
-                                echo "<option>完了</option>";
+                                echo "<option ". if($row["status"] == "not_started")echo "selected"; ." >未着手</option>";
+                                echo "<option ". if($row["status"] == "started")echo "selected"; ." >着手中</option>";
+                                echo "<option ". if($row["status"] == "complete")echo "selected"; ." >完了</option>";
                             echo "</select>"."</td>";
                             echo "<td>"."<input type='text' name='pID' size=5>"."</td>";
-                            echo "<td>"."<input type='submit' value='更新'>"."</td>";
+                            echo "<td>"."<input type='submit' value='更新' name='reload'>"."</td>";
                         echo "</tr>";
                     }
                     echo "</table>";
+
+
                     
 
                 }
