@@ -54,9 +54,19 @@
                     $priority = $_POST['priority'];
                     $ID = $_POST['ID'];
                     
-                    if($reload = $_POST['reload']){
-                        $priority = $_POST['re_priority'];
+                    if(isset($_POST['reload'])) {
+                        $re_priority = $_POST['re_priority'];
+                        $update_id = $_POST['update_id'];
+                    
+                        // 優先順位の更新クエリを準備する
+                        $update_priority = $pdo->prepare("UPDATE issues SET priority = :priority WHERE issue_id = :id");
+                        $update_priority->bindParam(':priority', $re_priority);
+                        $update_priority->bindParam(':id', $update_id);
+                        $update_priority->execute();
+                    
+                        // 成功したらメッセージを表示するなどの処理を行う
                     }
+                    
 
                     if (!empty($user) && !empty($repo) && !empty($title) && !empty($label) && !empty($priority) && !empty($ID)) {
                         $stmt_issues = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
