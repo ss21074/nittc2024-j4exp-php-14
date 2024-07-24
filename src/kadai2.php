@@ -4,7 +4,7 @@
         <title>イシュー管理システム</title>      
     </head>
     <body>
-        <form action = "kadai2.php" method = "post" >
+        <form action="kadai2.php" method="post">
             <br>
             <label>ユーザ名:</label>
             <input type="text" name="user" size=5>
@@ -15,10 +15,8 @@
             <label>イシュータイトル:</label>
             <input type="text" name="title" size=5>
             <br>
-
-            <input type="radio" name="label" value = "bug">バグ
-            <input type="radio" name="label" value = "feature">機能要求
-
+            <input type="radio" name="label" value="bug">バグ
+            <input type="radio" name="label" value="feature">機能要求
             <br>
             <label>優先順位:</label>
             <input type="text" name="priority" size=5>
@@ -27,53 +25,29 @@
             <input type="text" name="ID" size=5>
             <br>
             <input type="submit" value="送信">
-        </from>
+        </form>
 
-            <?php
-                try {
-                    $pdo = new PDO("pgsql:host=dpg-cq6cq24s1f4s73e07gbg-a;
-                    dbname=nittc2024_j4exp_php_14_1;
-                    user=nittc2024_j4exp_php_14_1_user;
-                    password=GO8qoM9YpAPut8mQpOSKrYePfmmmr4cQ;");
-                    echo "Connected successfully.";
-                } 
-                catch (PDOException $e) {
-                    echo "Connection failed: " . $e->getMessage();
-                }
+        <?php
+            try {
+                $pdo = new PDO("pgsql:host=dpg-cq6cq24s1f4s73e07gbg-a;
+                dbname=nittc2024_j4exp_php_14_1;
+                user=nittc2024_j4exp_php_14_1_user;
+                password=GO8qoM9YpAPut8mQpOSKrYePfmmmr4cQ;");
+                echo "Connected successfully.";
+            } 
+            catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
 
-                try{
+            try {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    $user = $_POST['user'] ?? '';
+                    $repo = $_POST['repo'] ?? '';
+                    $title = $_POST['title'] ?? '';
+                    $label = $_POST['label'] ?? '';
+                    $priority = $_POST['priority'] ?? '';
+                    $ID = $_POST['ID'] ?? '';
                     
-
-
-
-
-                    $user = $_POST['user'];
-                    $repo = $_POST['repo'];
-                    $title = $_POST['title'];
-                    $label = $_POST['label'];
-                    $priority = $_POST['priority'];
-                    $ID = $_POST['ID'];
-                    
-
-
-
-                    if(isset($_POST['reload'])) {
-                        $re_priority = $_POST['re_priority'];
-                        $update_id = $_POST['update_id'];
-                    
-                        // 優先順位の更新クエリを準備する
-                        $update_priority = $pdo->prepare("UPDATE issues SET priority = :priority WHERE issue_id = :id");
-                        $update_priority->bindParam(':priority', $re_priority);
-                        $update_priority->bindParam(':id', $update_id);
-                        $update_priority->execute();
-                    
-                        // 成功したらメッセージを表示するなどの処理を行う
-                    }
-                    
-
-
-
-
                     if (!empty($user) && !empty($repo) && !empty($title) && !empty($label) && !empty($priority) && !empty($ID)) {
                         $stmt_issues = $pdo->prepare("INSERT INTO issues (title, label, priority, issue_id) VALUES (:title, :label, :priority, :ID)");
                         $stmt_issues->bindParam(':title', $title);
@@ -82,72 +56,92 @@
                         $stmt_issues->bindParam(':ID', $ID);
                         $stmt_issues->execute();
 
-                        $stmt_repos = $pdo->prepare("INSERT INTO repos (username, reponame,id) VALUES (:username, :reponame, :id)");
+                        $stmt_repos = $pdo->prepare("INSERT INTO repos (username, reponame, id) VALUES (:username, :reponame, :id)");
                         $stmt_repos->bindParam(':username', $user);
                         $stmt_repos->bindParam(':reponame', $repo);
                         $stmt_repos->bindParam(':id', $ID);
                         $stmt_repos->execute();
                     }
 
-                    $new_table = "SELECT * FROM repos JOIN issues ON issues.issue_id = repos.id";
-                    $stmt = $pdo->prepare($new_table);
-                    $stmt->execute();
+                    if (isset($_POST['update_id'])) {
+                        $update_id = $_POST['update_id'];
+                        $re_priority = $_POST['re_priority'] ?? '';
+                        $re_status = $_POST['re_status'] ?? '';
+                        $pID = $_POST['pID'] ?? '';
 
-                    $sql = "$new_table ORDER BY priority DESC";
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->execute();
+                        $update_query = "UPDATE issues SET ";
+                        $params = [];
 
-                    echo "<br>";
-                    echo "<table border='1'>";
-                            echo "<tr>";
-                                echo "<td>" . "ユーザ名" . "</td>";
-                                echo "<td>" . "レポジトリ名" . "</td>";
-                                echo "<td>" . "イシュータイトル" . "</td>";
-                                echo "<td>" . "ラベル" . "</td>";
-                                echo "<td>" . "優先順位" . "</td>";
-                                echo "<td>" . "イシューコミットID" . "</td>";
-                                echo "<td>" . "状態" . "</td>";
-                                echo "<td>" . "完了コミットID" . "</td>";
-                                echo "<td>" . "更新ボタン" . "</td>";
-                            echo "</tr>";
+                        if (!empty($re_priority)) {
+                            $update_query .= "priority = :priority, ";
+                            $params[':priority'] = $re_priority;
+                        }
+                        if (!empty($re_status)) {
+                            $update_query .= "status = :status, ";
+                            $params[':status'] = $re_status;
+                        }
+                        if (!empty($pID)) {
+                            $update_query .= "complete_commit = :complete_commit, ";
+                            $params[':complete_commit'] = $pID;
+                        }
 
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<tr>";
-                            echo "<td>" . $row['username'] . "</td>";
-                            echo "<td>" . $row['reponame'] . "</td>";
-                            echo "<td>" . $row['title'] . "</td>";
-                            if($row['label'] == "bug"){
-                                $row['label'] = "バグ";
-                            }
-                            else if($row['label'] == "feature"){
-                                $row['label'] = "機能要求";
-                            }
+                        $update_query = rtrim($update_query, ', ');
+                        $update_query .= " WHERE issue_id = :id";
+                        $params[':id'] = $update_id;
 
-                            echo "<td>" . $row['label'] . "</td>";
-                            echo "<td>"."<input type='text' name='re_priority' value=".$row['priority'].">"."</td>";
-                            echo "<td>" . $row['issue_id'] . "</td>";
-                            echo "<td>"."<select name='re_status'>";
-                                echo "<option " ." >未着手</option>";
-                                echo "<option " ." >着手中</option>";
-                                echo "<option "." >完了</option>";
-                            echo "</select>"."</td>";
-                            echo "<td>"."<input type='text' name='pID' size=5>"."</td>";
-
-
-                            echo "<input type='hidden' name='update_id' value=",$row['issue_id'],">";
-                            echo "<td>"."<input type='submit' value='更新' name='reload'>"."</td>";
-
-                            
-                        echo "</tr>";
-
+                        $stmt_update = $pdo->prepare($update_query);
+                        foreach ($params as $key => &$val) {
+                            $stmt_update->bindParam($key, $val);
+                        }
+                        $stmt_update->execute();
                     }
-                    echo "</table>";
                 }
-                catch (PDOException $e) {
-                    echo "Connection failed: " . $e->getMessage();
-                }
-            ?>
 
+                $new_table = "SELECT * FROM repos JOIN issues ON issues.issue_id = repos.id ORDER BY priority DESC";
+                $stmt = $pdo->prepare($new_table);
+                $stmt->execute();
+
+                echo "<br>";
+                echo "<table border='1'>";
+                echo "<tr>";
+                    echo "<td>ユーザ名</td>";
+                    echo "<td>レポジトリ名</td>";
+                    echo "<td>イシュータイトル</td>";
+                    echo "<td>ラベル</td>";
+                    echo "<td>優先順位</td>";
+                    echo "<td>イシューコミットID</td>";
+                    echo "<td>状態</td>";
+                    echo "<td>完了コミットID</td>";
+                    echo "<td>更新ボタン</td>";
+                echo "</tr>";
+
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['reponame']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['title']) . "</td>";
+                        echo "<td>" . ($row['label'] == "bug" ? "バグ" : "機能要求") . "</td>";
+                        echo "<td><form action='kadai2.php' method='post'>
+                                <input type='text' name='re_priority' value='" . htmlspecialchars($row['priority']) . "'>
+                              </td>";
+                        echo "<td>" . htmlspecialchars($row['issue_id']) . "</td>";
+                        echo "<td><select name='re_status'>
+                                <option value='not_started'" . ($row['status'] == 'not_started' ? ' selected' : '') . ">未着手</option>
+                                <option value='in_progress'" . ($row['status'] == 'in_progress' ? ' selected' : '') . ">着手中</option>
+                                <option value='completed'" . ($row['status'] == 'completed' ? ' selected' : '') . ">完了</option>
+                              </select></td>";
+                        echo "<td><input type='text' name='pID' size=5 value='" . htmlspecialchars($row['complete_commit']) . "'></td>";
+                        echo "<td>
+                                <input type='hidden' name='update_id' value='" . htmlspecialchars($row['issue_id']) . "'>
+                                <input type='submit' value='更新' name='reload'>
+                              </form></td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+        ?>
     </body>
 </html>
-
