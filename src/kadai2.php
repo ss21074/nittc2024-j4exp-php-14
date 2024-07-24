@@ -119,6 +119,10 @@
                 echo "</tr>";
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $commit_url = "https://github.com/" . htmlspecialchars($row['username']) . "/" . htmlspecialchars($row['reponame']) . "/commits/" . htmlspecialchars($row['issue_id']);
+                    $tree_url = "https://github.com/" . htmlspecialchars($row['username']) . "/" . htmlspecialchars($row['reponame']) . "/tree/" . htmlspecialchars($row['issue_id']);
+                    $compare_url = "https://github.com/" . htmlspecialchars($row['username']) . "/" . htmlspecialchars($row['reponame']) . "/compare/" . htmlspecialchars($row['issue_id']) . "..." . htmlspecialchars($row['complete_commit']);
+                    
                     echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['username']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['reponame']) . "</td>";
@@ -138,6 +142,9 @@
                                 <input type='hidden' name='update_id' value='" . htmlspecialchars($row['issue_id']) . "'>
                                 <input type='submit' value='更新' name='reload'>
                               </form></td>";
+                        echo "<td><a href='" . $commit_url . "' target='_blank'>コミットURL</a></td>";
+                        echo "<td><a href='" . $tree_url . "' target='_blank'>ワークツリーURL</a></td>";
+                        echo "<td><a href='" . $compare_url . "' target='_blank'>コミット間差分</a></td>";
                     echo "</tr>";
                 }
                 echo "</table>";
