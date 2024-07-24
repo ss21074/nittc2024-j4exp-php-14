@@ -119,9 +119,9 @@
                 echo "</tr>";
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $commit_url = "https://github.com/" . htmlspecialchars($row['username']) . "/" . htmlspecialchars($row['reponame']) . "/commits/" . htmlspecialchars($row['issue_id']);
-                    $tree_url = "https://github.com/" . htmlspecialchars($row['username']) . "/" . htmlspecialchars($row['reponame']) . "/tree/" . htmlspecialchars($row['issue_id']);
-                    $compare_url = "https://github.com/" . htmlspecialchars($row['username']) . "/" . htmlspecialchars($row['reponame']) . "/compare/" . htmlspecialchars($row['issue_id']) . "..." . htmlspecialchars($row['complete_commit']);
+                    $commit_url = "https://github.com/" . str_replace(' ', '', htmlspecialchars($row['username'])) . "/" . str_replace(' ', '', htmlspecialchars($row['reponame'])) . "/commits/" . str_replace(' ', '', htmlspecialchars($row['issue_id']));
+                    $tree_url = "https://github.com/" . str_replace(' ', '', htmlspecialchars($row['username'])) . "/" . str_replace(' ', '', htmlspecialchars($row['reponame'])) . "/tree/" . str_replace(' ', '', htmlspecialchars($row['issue_id']));
+                    $compare_url = "https://github.com/" . str_replace(' ', '', htmlspecialchars($row['username'])) . "/" . str_replace(' ', '', htmlspecialchars($row['reponame'])) . "/compare/" . str_replace(' ', '', htmlspecialchars($row['issue_id'])) . "..." . str_replace(' ', '', htmlspecialchars($row['complete_commit']));
                     
                     echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['username']) . "</td>";
