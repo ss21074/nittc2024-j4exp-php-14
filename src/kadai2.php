@@ -116,27 +116,33 @@
                 echo "</tr>";
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $commit_url = "https://github.com/" . rawurlencode($row['username']) . "/" . rawurlencode($row['reponame']) . "/commits/" . rawurlencode($row['issue_id']);
-                    $tree_url = "https://github.com/" . rawurlencode($row['username']) . "/" . rawurlencode($row['reponame']) . "/tree/" . rawurlencode($row['issue_id']);
-                    $compare_url = "https://github.com/" . rawurlencode($row['username']) . "/" . rawurlencode($row['reponame']) . "/compare/" . rawurlencode($row['issue_id']) . "..." . rawurlencode($row['complete_commit']);
+                    // 値の前後のスペースを削除
+                    $username = trim(htmlspecialchars($row['username']));
+                    $reponame = trim(htmlspecialchars($row['reponame']));
+                    $issue_id = trim(htmlspecialchars($row['issue_id']));
+                    $complete_commit = trim(htmlspecialchars($row['complete_commit']));
+
+                    $commit_url = "https://github.com/" . $username . "/" . $reponame . "/commits/" . $issue_id;
+                    $tree_url = "https://github.com/" . $username . "/" . $reponame . "/tree/" . $issue_id;
+                    $compare_url = "https://github.com/" . $username . "/" . $reponame . "/compare/" . $issue_id . "..." . $complete_commit;
                     
                     echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['username']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['reponame']) . "</td>";
+                        echo "<td>" . $username . "</td>";
+                        echo "<td>" . $reponame . "</td>";
                         echo "<td>" . htmlspecialchars($row['title']) . "</td>";
                         echo "<td>" . ($row['label'] == "bug" ? "バグ" : "機能要求") . "</td>";
                         echo "<td><form action='kadai2.php' method='post'>
                                 <input type='text' name='re_priority' value='" . htmlspecialchars($row['priority']) . "'>
                               </td>";
-                        echo "<td>" . htmlspecialchars($row['issue_id']) . "</td>";
+                        echo "<td>" . $issue_id . "</td>";
                         echo "<td><select name='re_status'>
                                 <option value='not_started'" . ($row['status'] == 'not_started' ? ' selected' : '') . ">未着手</option>
                                 <option value='in_progress'" . ($row['status'] == 'in_progress' ? ' selected' : '') . ">着手中</option>
                                 <option value='completed'" . ($row['status'] == 'completed' ? ' selected' : '') . ">完了</option>
                               </select></td>";
-                        echo "<td><input type='text' name='pID' size=5 value='" . htmlspecialchars($row['complete_commit']) . "'></td>";
+                        echo "<td><input type='text' name='pID' size=5 value='" . $complete_commit . "'></td>";
                         echo "<td>
-                                <input type='hidden' name='update_id' value='" . htmlspecialchars($row['issue_id']) . "'>
+                                <input type='hidden' name='update_id' value='" . $issue_id . "'>
                                 <input type='submit' value='更新' name='reload'>
                               </form></td>";
                         echo "<td><a href='" . $commit_url . "' target='_blank'>コミットURL</a></td>";
