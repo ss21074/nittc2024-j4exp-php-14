@@ -113,6 +113,9 @@
                     echo "<td>状態</td>";
                     echo "<td>完了コミットID</td>";
                     echo "<td>更新ボタン</td>";
+                    echo "<td>コミットのURL</td>";
+                    echo "<td>ワークツリーのURL</td>";
+                    echo "<td>コミット間差分</td>"
                 echo "</tr>";
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
