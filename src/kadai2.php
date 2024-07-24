@@ -29,10 +29,7 @@
 
         <?php
             try {
-                $pdo = new PDO("pgsql:host=dpg-cq6cq24s1f4s73e07gbg-a;
-                dbname=nittc2024_j4exp_php_14_1;
-                user=nittc2024_j4exp_php_14_1_user;
-                password=GO8qoM9YpAPut8mQpOSKrYePfmmmr4cQ;");
+                $pdo = new PDO("pgsql:host=dpg-cq6cq24s1f4s73e07gbg-a;dbname=nittc2024_j4exp_php_14_1;user=nittc2024_j4exp_php_14_1_user;password=GO8qoM9YpAPut8mQpOSKrYePfmmmr4cQ;");
                 echo "Connected successfully.";
             } 
             catch (PDOException $e) {
@@ -119,9 +116,9 @@
                 echo "</tr>";
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $commit_url = "https://github.com/" . htmlspecialchars($row['username']) . "/" . htmlspecialchars($row['reponame']) . "/commits/" . htmlspecialchars($row['issue_id']);
-                    $tree_url = "https://github.com/" . htmlspecialchars($row['username']) . "/" . htmlspecialchars($row['reponame']) . "/tree/" . htmlspecialchars($row['issue_id']);
-                    $compare_url = "https://github.com/".htmlspecialchars($row['username'])."/".htmlspecialchars($row['reponame'])."/compare/".htmlspecialchars($row['issue_id'])."...".htmlspecialchars($row['complete_commit']);
+                    $commit_url = "https://github.com/" . rawurlencode($row['username']) . "/" . rawurlencode($row['reponame']) . "/commits/" . rawurlencode($row['issue_id']);
+                    $tree_url = "https://github.com/" . rawurlencode($row['username']) . "/" . rawurlencode($row['reponame']) . "/tree/" . rawurlencode($row['issue_id']);
+                    $compare_url = "https://github.com/" . rawurlencode($row['username']) . "/" . rawurlencode($row['reponame']) . "/compare/" . rawurlencode($row['issue_id']) . "..." . rawurlencode($row['complete_commit']);
                     
                     echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['username']) . "</td>";
@@ -155,4 +152,3 @@
         ?>
     </body>
 </html>
-
