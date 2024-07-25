@@ -19,7 +19,7 @@
         label {
             display: inline-block;
             width: 100px;
-            text-align: right;
+            text-align: center;
             margin-right: 10px;
         }
         input[type="text"] {
