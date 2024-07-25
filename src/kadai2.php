@@ -132,10 +132,10 @@
                         $stmt_repos->execute();
                     }
                     else{
-                        echo "全ての項目を入力してください。"
+                        echo "全ての項目を入力してください。";
                     }
                     if(!empty($priority) && $priority <= 0){
-                        echo "優先順位を1以上にしてください"
+                        echo "優先順位を1以上にしてください";
                     }
 
                     
