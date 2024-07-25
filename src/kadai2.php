@@ -9,7 +9,12 @@
         margin: 20px;
         }
         form {
-            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin-top: 20px;
         }
         label {
             display: inline-block;
