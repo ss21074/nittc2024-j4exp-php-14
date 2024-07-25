@@ -131,7 +131,14 @@
                         $stmt_repos->bindParam(':id', $ID);
                         $stmt_repos->execute();
                     }
+                    else{
+                        echo "全ての項目を入力してください。"
+                    }
+                    if(!empty($priority) && $priority <= 0){
+                        echo "優先順位を1以上にしてください"
+                    }
 
+                    
                     if (isset($_POST['update_id'])) {
                         $update_id = $_POST['update_id'];
                         $re_priority = $_POST['re_priority'] ?? '';
