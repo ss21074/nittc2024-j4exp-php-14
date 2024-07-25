@@ -141,7 +141,7 @@
                     else{
                         echo "<div class='message'>全ての項目を入力してください。</div>";
                     }
-                    if(!empty($priority) && ($priority < 0 || $priority = 0)){
+                    if(!empty($priority) && ($priority < 0 || $priority == 0)){
                         echo "<div class='message'>優先順位を1以上にしてください</div>";
                     }
 
