@@ -1,7 +1,78 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>イシュー管理システム</title>      
+        <title>イシュー管理システム</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f9f9f9;
+                color: #333;
+                text-align: center;
+            }
+
+            form {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                display: inline-block;
+                margin-top: 20px;
+            }
+
+            input[type="text"], select, input[type="radio"], label {
+                margin: 10px 0;
+                font-size: 14px;
+                padding: 5px;
+            }
+
+            input[type="submit"] {
+                background-color: #ff7f7f;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            input[type="submit"]:hover {
+                background-color: #ff4f4f;
+            }
+
+            table {
+                width: 80%;
+                margin: 20px auto;
+                border-collapse: collapse;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            th, td {
+                padding: 10px;
+                border: 1px solid #ddd;
+                text-align: center;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            tr:hover {
+                background-color: #f1f1f1;
+            }
+
+            a {
+                color: #ff7f7f;
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>      
     </head>
     <body>
         <form action="kadai2.php" method="post">
@@ -158,3 +229,6 @@
         ?>
     </body>
 </html>
+
+
+
