@@ -53,7 +53,7 @@
             }
 
             th {
-                background-color: #f2f2f2;
+                background-color: #ffe6e6;
             }
 
             tr:nth-child(even) {
@@ -71,6 +71,12 @@
 
             a:hover {
                 text-decoration: underline;
+            }
+
+            .message {
+                text-align: center;
+                color: red;
+                margin: 20px 0;
             }
         </style>
     </head>
@@ -102,10 +108,10 @@
         <?php
             try {
                 $pdo = new PDO("pgsql:host=dpg-cq6cq24s1f4s73e07gbg-a;dbname=nittc2024_j4exp_php_14_1;user=nittc2024_j4exp_php_14_1_user;password=GO8qoM9YpAPut8mQpOSKrYePfmmmr4cQ;");
-                echo "データベースに接続完了";
+                echo "<div class='message'>データベースに接続完了</div>";
             } 
             catch (PDOException $e) {
-                echo "データベースに接続できませんでした。" . $e->getMessage();
+                echo "<div class='message'>データベースに接続できませんでした。" . $e->getMessage() . "</div>";
             }
 
             try {
@@ -132,10 +138,10 @@
                         $stmt_repos->execute();
                     }
                     else{
-                        echo "全ての項目を入力してください。";
+                        echo "<div class='message'>全ての項目を入力してください。</div>";
                     }
                     if(!empty($priority) && $priority <= 0){
-                        echo "優先順位を1以上にしてください";
+                        echo "<div class='message'>優先順位を1以上にしてください</div>";
                     }
 
                     
@@ -232,11 +238,8 @@
                 echo "</table>";
             }
             catch (PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
+                echo "<div class='message'>Connection failed: " . $e->getMessage() . "</div>";
             }
         ?>
     </body>
 </html>
-
-
-
