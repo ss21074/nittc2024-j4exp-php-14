@@ -147,11 +147,7 @@
                     else if($priority == 0){
                         echo "<div class='message'>優先順位を1以上にしてください</div>";
                     }
-                    else if(!is_numeric($priority)){
-                        "<div class='message'>優先順位を1以上の数値にしてください</div>";
-                    }
 
-                    
                     if (isset($_POST['update_id'])) {
                         $update_id = $_POST['update_id'];
                         $re_priority = $_POST['re_priority'] ?? '';
