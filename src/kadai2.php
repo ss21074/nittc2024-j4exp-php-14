@@ -187,18 +187,18 @@
                 echo "<br>";
                 echo "<table border='1'>";
                 echo "<tr>";
-                    echo "<td>ユーザ名</td>";
-                    echo "<td>レポジトリ名</td>";
-                    echo "<td>イシュータイトル</td>";
-                    echo "<td>ラベル</td>";
-                    echo "<td>優先順位</td>";
-                    echo "<td>イシューコミットID</td>";
-                    echo "<td>状態</td>";
-                    echo "<td>完了コミットID</td>";
-                    echo "<td>更新ボタン</td>";
-                    echo "<td>コミットのURL</td>";
-                    echo "<td>ワークツリーのURL</td>";
-                    echo "<td>コミット間差分</td>";
+                    echo "<th>ユーザ名</th>";
+                    echo "<th>レポジトリ名</th>";
+                    echo "<th>イシュータイトル</th>";
+                    echo "<th>ラベル</th>";
+                    echo "<th>優先順位</th>";
+                    echo "<th>イシューコミットID</th>";
+                    echo "<th>状態</th>";
+                    echo "<th>完了コミットID</th>";
+                    echo "<th>更新ボタン</th>";
+                    echo "<th>コミットのURL</th>";
+                    echo "<th>ワークツリーのURL</th>";
+                    echo "<th>コミット間差分</th>";
                 echo "</tr>";
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
