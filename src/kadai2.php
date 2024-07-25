@@ -4,83 +4,83 @@
         <title>イシュー管理システム</title>
         <style>
             body {
-                background-color: #f0f8ff;
-                font-family: Arial, sans-serif;
-                margin: 20px;
-            }
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-            h1 {
-                text-align: center;
-                color: #333;
-            }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
 
-            form {
-                margin-bottom: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-            form > div {
-                display: flex;
-                justify-content: flex-end;
-                width: 300px;
-                margin-bottom: 10px;
-            }
+        form > div {
+            display: flex;
+            justify-content: flex-end;
+            width: 300px;
+            margin-bottom: 10px;
+        }
 
-            label {
-                width: 100px;
-                margin-right: 10px;
-                text-align: right;
-            }
+        label {
+            width: 100px;
+            margin-right: 10px;
+            text-align: right;
+        }
 
-            input[type="text"] {
-                flex: 1;
-            }
+        input[type="text"] {
+            flex: 1;
+        }
 
-            input[type="submit"] {
-                background-color: #007BFF;
-                color: white;
-                border: none;
-                padding: 5px 10px;
-                cursor: pointer;
-                margin-top: 10px;
-            }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-            input[type="submit"]:hover {
-                background-color: #0056b3;
-            }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
 
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                background-color: white;
-                margin-top: 20px;
-            }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-top: 20px;
+        }
 
-            th, td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: left;
-            }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
 
-            th {
-                background-color: #007BFF;
-                color: white;
-            }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
 
-            tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-            a {
-                color: #0000ff;
-                text-decoration: none;
-            }
+        a {
+            color: #0000ff;
+            text-decoration: none;
+        }
 
-            a:hover {
-                text-decoration: underline;
-            }
+        a:hover {
+            text-decoration: underline;
+        }
 
         </style>      
     </head>
